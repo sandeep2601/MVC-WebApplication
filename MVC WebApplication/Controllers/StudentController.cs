@@ -42,5 +42,15 @@ namespace MVC_WebApplication.Controllers
             var result = dBEntities.tbl_Student.ToList();
             return View(result);
         }
+
+        public ActionResult Delete(int id)
+        {
+            var result = dBEntities.tbl_Student.Where(x => x.ID == id).First();
+            dBEntities.tbl_Student.Remove(result);
+            dBEntities.SaveChanges();
+
+            var updatedList = dBEntities.tbl_Student.ToList();
+            return View("StudentList", updatedList);
+        }
     }
 }

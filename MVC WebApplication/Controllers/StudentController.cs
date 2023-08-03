@@ -20,15 +20,19 @@ namespace MVC_WebApplication.Controllers
         [HttpPost]
         public ActionResult AddStudent(tbl_Student model)
         {
-            tbl_Student student = new tbl_Student();
-            student.Name = model.Name;
-            student.FName = model.FName;
-            student.Email = model.Email;
-            student.Mobile = model.Mobile;
-            student.Description = model.Description;
+            if (ModelState.IsValid)
+            {
+                tbl_Student student = new tbl_Student();
+                student.Name = model.Name;
+                student.FName = model.FName;
+                student.Email = model.Email;
+                student.Mobile = model.Mobile;
+                student.Description = model.Description;
 
-            dBEntities.tbl_Student.Add(student);
-            dBEntities.SaveChanges();
+                dBEntities.tbl_Student.Add(student);
+                dBEntities.SaveChanges();
+            }
+            ModelState.Clear();
 
             return View("Student");
         }

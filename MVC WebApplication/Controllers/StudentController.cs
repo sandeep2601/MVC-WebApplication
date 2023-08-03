@@ -30,7 +30,7 @@ namespace MVC_WebApplication.Controllers
             dBEntities.tbl_Student.Add(student);
             dBEntities.SaveChanges();
 
-            return View();
+            return View("Student");
         }
     }
 }

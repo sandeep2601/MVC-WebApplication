@@ -11,13 +11,21 @@ namespace MVC_WebApplication.Context
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_Student
     {
         public int ID { get; set; }
+        [Required(ErrorMessage ="Required")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Required")]
         public string FName { get; set; }
+        [Required(ErrorMessage = "Required")]
+        [EmailAddress(ErrorMessage = "Please enter a valid Email address")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Required")]
+        [MinLength(10, ErrorMessage = "Mobile number should be 10 digit only")]
+        [MaxLength(10, ErrorMessage = "Mobile number should be 10 digit only")]
         public string Mobile { get; set; }
         public string Description { get; set; }
     }

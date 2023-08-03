@@ -12,8 +12,10 @@ namespace MVC_WebApplication.Controllers
         MVC_Test_DBEntities dBEntities = new MVC_Test_DBEntities();
 
         // GET: Student
-        public ActionResult Student()
+        public ActionResult Student(tbl_Student model)
         {
+            if (model != null)
+                return View(model);
             return View();
         }
 
@@ -23,14 +25,24 @@ namespace MVC_WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 tbl_Student student = new tbl_Student();
+                student.ID = model.ID;
                 student.Name = model.Name;
                 student.FName = model.FName;
                 student.Email = model.Email;
                 student.Mobile = model.Mobile;
                 student.Description = model.Description;
 
-                dBEntities.tbl_Student.Add(student);
-                dBEntities.SaveChanges();
+                if (model.ID == 0)
+                {
+                    dBEntities.tbl_Student.Add(student);
+                    dBEntities.SaveChanges();
+                }
+                else
+                {
+                    dBEntities.Entry(student).State = System.Data.Entity.EntityState.Modified;
+                    dBEntities.SaveChanges();
+                }
+
             }
             ModelState.Clear();
 

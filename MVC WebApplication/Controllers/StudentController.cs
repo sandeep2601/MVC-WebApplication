@@ -36,5 +36,11 @@ namespace MVC_WebApplication.Controllers
 
             return View("Student");
         }
+
+        public ActionResult StudentList()
+        {
+            var result = dBEntities.tbl_Student.ToList();
+            return View(result);
+        }
     }
 }
